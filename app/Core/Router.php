@@ -18,7 +18,7 @@ class Router
     public function dispatch()
     {
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $uri = str_replace('/php-vanilla/', '/', $uri);
+        $uri = str_replace('/php-basic-boilerplate/', '/', $uri);
         $method = $_SERVER['REQUEST_METHOD'];
 
         foreach ($this->routes as $route) {

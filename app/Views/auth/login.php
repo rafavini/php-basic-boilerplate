@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - PHP MVC</title>
-    <link rel="stylesheet" href="/php-vanilla/public/css/style.css">
+    <link rel="stylesheet" href="/php-basic-boilerplate/public/css/style.css">
 </head>
 <body class="auth-page">
     <div class="login-container">
@@ -14,7 +14,7 @@
             <div class="alert error"><?php echo $error; ?></div>
         <?php endif; ?>
 
-        <form action="/php-vanilla/login" method="POST">
+        <form action="/php-basic-boilerplate/login" method="POST">
             <div class="form-group">
                 <label>E-mail</label>
                 <input type="email" name="email" required placeholder="admin@teste.com">

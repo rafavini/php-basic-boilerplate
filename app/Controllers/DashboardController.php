@@ -10,7 +10,7 @@ class DashboardController extends Controller
     public function index()
     {
         if (!isset($_SESSION['user'])) {
-            $this->redirect('/php-vanilla/login');
+            $this->redirect('/php-basic-boilerplate/login');
         }
 
         $users = User::all();

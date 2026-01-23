@@ -10,7 +10,7 @@ class AuthController extends Controller
     public function showLogin()
     {
         if (isset($_SESSION['user'])) {
-            $this->redirect('/php-vanilla/dashboard');
+            $this->redirect('/php-basic-boilerplate/dashboard');
         }
         $this->view('auth/login');
     }
@@ -29,7 +29,7 @@ class AuthController extends Controller
                 'email' => $user['email'],
                 'role' => $user['role_name']
             ];
-            $this->redirect('/php-vanilla/dashboard');
+            $this->redirect('/php-basic-boilerplate/dashboard');
         } else {
             $this->view('auth/login', ['error' => 'Credenciais invlidas']);
         }
@@ -38,6 +38,6 @@ class AuthController extends Controller
     public function logout()
     {
         session_destroy();
-        $this->redirect('/php-vanilla/login');
+        $this->redirect('/php-basic-boilerplate/login');
     }
 }

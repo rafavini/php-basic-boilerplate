@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - PHP MVC</title>
-    <link rel="stylesheet" href="/php-vanilla/public/css/style.css">
+    <link rel="stylesheet" href="/php-basic-boilerplate/public/css/style.css">
 </head>
 <body>
     <header>
@@ -11,7 +11,7 @@
             <h1>Sistema Didático</h1>
             <div class="user-info">
                 Olá, <strong><?php echo $user['name']; ?></strong> (<?php echo $user['role']; ?>)
-                <a href="/php-vanilla/logout" class="logout-link">Sair</a>
+                <a href="/php-basic-boilerplate/logout" class="logout-link">Sair</a>
             </div>
         </div>
     </header>
@@ -49,6 +49,6 @@
         </section>
     </main>
 
-    <script src="/php-vanilla/public/js/app.js"></script>
+    <script src="/php-basic-boilerplate/public/js/app.js"></script>
 </body>
 </html>

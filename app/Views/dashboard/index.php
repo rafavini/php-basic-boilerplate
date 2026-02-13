@@ -11,6 +11,9 @@
             <h1>Sistema Didático</h1>
             <div class="user-info">
                 Olá, <strong><?php echo $user['name']; ?></strong> (<?php echo $user['role']; ?>)
+                <?php if ($user['role'] === 'admin'): ?>
+                    <a href="/php-basic-boilerplate/users" style="color: #ffc107; margin-right: 15px; text-decoration: none;">Gerenciar Usuários</a>
+                <?php endif; ?>
                 <a href="/php-basic-boilerplate/logout" class="logout-link">Sair</a>
             </div>
         </div>

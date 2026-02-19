@@ -4,17 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($user) ? 'Editar' : 'Novo' ?> Usuário</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
-        label { display: block; margin-top: 10px; }
-        input, select { width: 100%; padding: 8px; margin-top: 5px; }
-        .btn { padding: 10px 15px; background-color: #28a745; color: white; border: none; cursor: pointer; margin-top: 20px; }
-        .btn-back { background-color: #6c757d; text-decoration: none; display: inline-block; text-align: center; }
-    </style>
+    <link rel="stylesheet" href="/php-basic-boilerplate/public/css/style.css">
 </head>
 <body>
+    <?php require __DIR__ . '/../components/navbar.php'; ?>
 
-    <h2><?= isset($user) ? 'Editar' : 'Criar' ?> Usuário</h2>
+    <div class="container">
+        <h2><?= isset($user) ? 'Editar' : 'Criar' ?> Usuário</h2>
 
     <form action="/php-basic-boilerplate/users/<?= isset($user) ? 'update' : 'store' ?>" method="POST">
         

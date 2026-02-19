@@ -4,24 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuários</title>
-    <!-- Simple CSS for Table -->
-    <style>
-        body { font-family: sans-serif; padding: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .btn { padding: 5px 10px; text-decoration: none; color: white; border-radius: 4px; }
-        .btn-primary { background-color: #007bff; }
-        .btn-danger { background-color: #dc3545; }
-        .btn-success { background-color: #28a745; }
-    </style>
+    <link rel="stylesheet" href="/php-basic-boilerplate/public/css/style.css">
 </head>
 <body>
+    <?php require __DIR__ . '/../components/navbar.php'; ?>
 
-    <h2>Gerenciar Usuários</h2>
-    
-    <a href="/php-basic-boilerplate/users/form" class="btn btn-success">Novo Usuário</a>
-    <a href="/php-basic-boilerplate/dashboard" class="btn btn-secondary" style="background-color: #6c757d;">Voltar</a>
+    <div class="container">
+        <h2>Gerenciar Usuários</h2>
+        
+        <a href="/php-basic-boilerplate/users/form" class="btn" style="background-color: var(--success); width: auto; display: inline-block; text-decoration: none; color: white; padding: 10px 15px; border-radius: 6px;">Novo Usuário</a>
+        <a href="/php-basic-boilerplate/dashboard" class="btn" style="background-color: var(--gray); width: auto; display: inline-block; text-decoration: none; color: white; padding: 10px 15px; border-radius: 6px;">Voltar</a>
 
     <table>
         <thead>
@@ -48,6 +40,24 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <?php if ($totalPages > 1): ?>
+        <div class="pagination">
+            <?php if ($currentPage > 1): ?>
+                <a href="?page=<?= $currentPage - 1 ?>">Anterior</a>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <a href="?page=<?= $i ?>" class="<?= $i == $currentPage ? 'active' : '' ?>"><?= $i ?></a>
+            <?php endfor; ?>
+
+            <?php if ($currentPage < $totalPages): ?>
+                <a href="?page=<?= $currentPage + 1 ?>">Próximo</a>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+    </div>
 
 </body>
 </html>

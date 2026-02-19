@@ -11,8 +11,21 @@ class UserController extends Controller
     public function index()
     {
         $this->checkAdmin();
-        $users = User::all();
-        $this->view('users/index', ['users' => $users]);
+        
+        $limit = 2; // Itens por página
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
+        
+        $totalUsers = User::count();
+        $totalPages = ceil($totalUsers / $limit);
+        
+        $users = User::paginate($limit, $offset);
+        
+        $this->view('users/index', [
+            'users' => $users,
+            'currentPage' => $page,
+            'totalPages' => $totalPages
+        ]);
     }
 
     public function form()

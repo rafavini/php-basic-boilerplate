@@ -6,18 +6,7 @@
     <link rel="stylesheet" href="/php-basic-boilerplate/public/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Sistema Didático</h1>
-            <div class="user-info">
-                Olá, <strong><?php echo $user['name']; ?></strong> (<?php echo $user['role']; ?>)
-                <?php if ($user['role'] === 'admin'): ?>
-                    <a href="/php-basic-boilerplate/users" style="color: #ffc107; margin-right: 15px; text-decoration: none;">Gerenciar Usuários</a>
-                <?php endif; ?>
-                <a href="/php-basic-boilerplate/logout" class="logout-link">Sair</a>
-            </div>
-        </div>
-    </header>
+    <?php require __DIR__ . '/../components/navbar.php'; ?>
 
     <main class="container">
         <section class="card">
@@ -40,6 +29,22 @@
                     <?php endforeach;?>
                 </tbody>
             </table>
+
+            <?php if ($totalPages > 1): ?>
+                <div class="pagination">
+                    <?php if ($currentPage > 1): ?>
+                        <a href="?page=<?= $currentPage - 1 ?>">Anterior</a>
+                    <?php endif; ?>
+
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <a href="?page=<?= $i ?>" class="<?= $i == $currentPage ? 'active' : '' ?>"><?= $i ?></a>
+                    <?php endfor; ?>
+
+                    <?php if ($currentPage < $totalPages): ?>
+                        <a href="?page=<?= $currentPage + 1 ?>">Próximo</a>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
         </section>
 
         <section class="card">

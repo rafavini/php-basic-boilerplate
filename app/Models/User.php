@@ -30,6 +30,23 @@ class User
         return $stmt->fetchAll();
     }
 
+    public static function count()
+    {
+        $db = Database::getInstance();
+        $stmt = $db->query("SELECT COUNT(*) FROM users");
+        return $stmt->fetchColumn();
+    }
+
+    public static function paginate($limit, $offset)
+    {
+        $db = Database::getInstance();
+        $stmt = $db->prepare("SELECT u.*, r.name as role_name FROM users u JOIN roles r ON u.role_id = r.id LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public static function create($data)
     {
         $db = Database::getInstance();

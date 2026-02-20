@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - PHP MVC</title>
-    <link rel="stylesheet" href="/php-basic-boilerplate/public/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/style.css">
 </head>
 <body>
     <?php require __DIR__ . '/../components/navbar.php'; ?>
@@ -57,6 +57,6 @@
         </section>
     </main>
 
-    <script src="/php-basic-boilerplate/public/js/app.js"></script>
+    <script src="<?= BASE_URL ?>public/js/app.js"></script>
 </body>
 </html>

@@ -12,6 +12,9 @@ spl_autoload_register(function ($class) {
 });
 
 // Load Routes
+$config = require __DIR__ . '/config/app.php';
+define('BASE_URL', $config['base_folder']);
+
 $router = new Core\Router();
 require_once __DIR__ . '/app/Routes/web.php';
 

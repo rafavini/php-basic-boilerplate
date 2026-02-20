@@ -25,7 +25,8 @@ class Controller
 
     protected function redirect($url)
     {
-        header("Location: " . $url);
+        $redirectUrl = (strpos($url, 'http') === 0) ? $url : BASE_URL . ltrim($url, '/');
+        header("Location: " . $redirectUrl);
         exit;
     }
 }

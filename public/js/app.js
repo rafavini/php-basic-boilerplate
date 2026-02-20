@@ -2,7 +2,7 @@ document.getElementById('btnLoadApi')?.addEventListener('click', function () {
     const responseDiv = document.getElementById('apiResponse');
     responseDiv.innerHTML = '<p>Carregando...</p>';
 
-    fetch('/php-basic-boilerplate/api/users')
+    fetch(window.BASE_URL + 'api/users')
         .then(response => response.json())
         .then(data => {
             if (data.error) {

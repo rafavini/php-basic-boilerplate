@@ -37,7 +37,7 @@ class UserController extends Controller
         if ($id) {
             $user = User::find($id);
             if (!$user) {
-                $this->redirect('/php-basic-boilerplate/users');
+                $this->redirect('/users');
             }
         }
 
@@ -56,7 +56,7 @@ class UserController extends Controller
         ];
 
         User::create($data);
-        $this->redirect('/php-basic-boilerplate/users');
+        $this->redirect('/users');
     }
 
     public function update()
@@ -71,7 +71,7 @@ class UserController extends Controller
         ];
 
         User::update($id, $data);
-        $this->redirect('/php-basic-boilerplate/users');
+        $this->redirect('/users');
     }
 
     public function delete()
@@ -79,13 +79,13 @@ class UserController extends Controller
         $this->checkAdmin();
         $id = $_GET['id'];
         User::delete($id);
-        $this->redirect('/php-basic-boilerplate/users');
+        $this->redirect('/users');
     }
 
     private function checkAdmin()
     {
         if (!isset($_SESSION['user'])) {
-            $this->redirect('/php-basic-boilerplate/login');
+            $this->redirect('/login');
         }
 
         if ($_SESSION['user']['role'] !== 'admin') {

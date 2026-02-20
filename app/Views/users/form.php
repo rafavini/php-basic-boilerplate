@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($user) ? 'Editar' : 'Novo' ?> Usuário</title>
-    <link rel="stylesheet" href="/php-basic-boilerplate/public/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/style.css">
 </head>
 <body>
     <?php require __DIR__ . '/../components/navbar.php'; ?>
@@ -12,7 +12,7 @@
     <div class="container">
         <h2><?= isset($user) ? 'Editar' : 'Criar' ?> Usuário</h2>
 
-    <form action="/php-basic-boilerplate/users/<?= isset($user) ? 'update' : 'store' ?>" method="POST">
+    <form action="<?= BASE_URL ?>users/<?= isset($user) ? 'update' : 'store' ?>" method="POST">
         
         <?php if (isset($user)): ?>
             <input type="hidden" name="id" value="<?= $user['id'] ?>">
@@ -37,7 +37,7 @@
         </select>
 
         <button type="submit" class="btn">Salvar</button>
-        <a href="/php-basic-boilerplate/users" class="btn btn-back">Cancelar</a>
+        <a href="<?= BASE_URL ?>users" class="btn btn-back">Cancelar</a>
     </form>
 
 </body>

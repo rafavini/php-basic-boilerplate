@@ -10,7 +10,7 @@ class DashboardController extends Controller
     public function index()
     {
         if (!isset($_SESSION['user'])) {
-            $this->redirect('/php-basic-boilerplate/login');
+            $this->redirect('/login');
         }
 
         $limit = 5; // Itens por página

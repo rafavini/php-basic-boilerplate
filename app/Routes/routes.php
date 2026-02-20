@@ -2,22 +2,11 @@
 
 /**
  * Centrailized Routes
- * $router->add(Method, URI, Controller@Method)
+ * Didactic Example for Students
  */
 
-$router->add('GET', '/', 'AuthController@showLogin');
-$router->add('GET', '/login', 'AuthController@showLogin');
-$router->add('POST', '/login', 'AuthController@login');
-$router->add('GET', '/logout', 'AuthController@logout');
-
-$router->add('GET', '/dashboard', 'DashboardController@index');
-
-// User CRUD Routes
-$router->add('GET', '/users', 'UserController@index');
-$router->add('GET', '/users/form', 'UserController@form');
-$router->add('POST', '/users/store', 'UserController@store');
-$router->add('POST', '/users/update', 'UserController@update');
-$router->add('GET', '/users/delete', 'UserController@delete');
-
-// API Routes
-$router->add('GET', '/api/users', 'ApiController@getUsers');
+// Sample CRUD Routes (The only routes in the system now)
+$router->add('GET', '/', 'SampleController@index');
+$router->add('GET', '/sample/form', 'SampleController@form');
+$router->add('POST', '/sample/save', 'SampleController@save');
+$router->add('GET', '/sample/delete', 'SampleController@delete');

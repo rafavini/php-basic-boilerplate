@@ -2,17 +2,17 @@
 
 namespace Models;
 
-use Core\Database;
+use Core\Model;
 use PDO;
 
-class Sample
+class Sample extends Model
 {
     /**
      * Get all users from the sample table
      */
     public static function all()
     {
-        $db = Database::getInstance();
+        $db = parent::getDB();
         $stmt = $db->query("SELECT * FROM users ORDER BY id DESC");
         return $stmt->fetchAll();
     }
@@ -22,7 +22,7 @@ class Sample
      */
     public static function find($id)
     {
-        $db = Database::getInstance();
+        $db = parent::getDB();
         $stmt = $db->prepare("SELECT * FROM users WHERE id = :id");
         $stmt->execute(['id' => $id]);
         return $stmt->fetch();
@@ -33,7 +33,7 @@ class Sample
      */
     public static function create($data)
     {
-        $db = Database::getInstance();
+        $db = parent::getDB();
         $stmt = $db->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
         return $stmt->execute([
             'name'     => $data['name'],
@@ -47,7 +47,7 @@ class Sample
      */
     public static function update($id, $data)
     {
-        $db = Database::getInstance();
+        $db = parent::getDB();
         $sql = "UPDATE users SET name = :name, email = :email";
         $params = [
             'id'    => $id,
@@ -71,7 +71,7 @@ class Sample
      */
     public static function delete($id)
     {
-        $db = Database::getInstance();
+        $db = parent::getDB();
         $stmt = $db->prepare("DELETE FROM users WHERE id = :id");
         return $stmt->execute(['id' => $id]);
     }

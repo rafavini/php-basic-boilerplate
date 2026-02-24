@@ -7,31 +7,30 @@ use PDOException;
 
 class Database
 {
-    private static $instance = null;
-    private $connection;
-
-    private function __construct()
-    {
-        $config = require __DIR__ . '/../../config/app.php';
-        $dbConfig = $config['db'];
-        
-        try {
-            $dsn = "mysql:host={$dbConfig['host']};dbname={$dbConfig['dbname']};charset=utf8mb4";
-            $this->connection = new PDO($dsn, $dbConfig['user'], $dbConfig['pass'], [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false,
-            ]);
-        } catch (PDOException $e) {
-            die("Connection failed: " . $e->getMessage());
-        }
-    }
+    // Armazena diretamente a conexão PDO (mais rápido, menos memória)
+    private static $connection = null;
 
     public static function getInstance()
     {
-        if (self::$instance === null) {
-            self::$instance = new self();
+        if (self::$connection === null) {
+            // Carregamos as configs apenas uma vez no momento da conexão
+            $config = require __DIR__ . '/../../config/app.php';
+            $db = $config['db'];
+            
+            try {
+                $dsn = "mysql:host={$db['host']};dbname={$db['dbname']};charset=utf8mb4";
+                
+                self::$connection = new PDO($dsn, $db['user'], $db['pass'], [
+                    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_EMULATE_PREPARES   => false,
+                    PDO::ATTR_PERSISTENT         => true 
+                ]);
+            } catch (PDOException $e) {
+                error_log($e->getMessage());
+                throw new \Exception("Erro ao conectar ao banco de dados.");
+            }
         }
-        return self::$instance->connection;
+        return self::$connection;
     }
 }

@@ -6,31 +6,39 @@ class Router
 {
     protected $routes = [];
 
-    public function add($method, $uri, $controller)
+    /**
+     * Registra uma rota.
+     *
+     * @param string|null $permission  ex: 'user.read'  |  null = pública
+     */
+    public function add(string $method, string $uri, string $controller, ?string $permission = null): void
     {
-        $this->routes[] = [
-            'method' => $method,
-            'uri' => $uri,
-            'controller' => $controller
-        ];
+        $this->routes[] = compact('method', 'uri', 'controller', 'permission');
     }
 
-    public function dispatch()
+    public function dispatch(): void
     {
         $config = require __DIR__ . '/../../config/app.php';
-        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $uri = str_replace($config['base_folder'], '/', $uri);
+        $uri    = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $uri    = str_replace($config['base_folder'], '/', $uri);
         $method = $_SERVER['REQUEST_METHOD'];
 
         foreach ($this->routes as $route) {
             if ($route['method'] === $method && $route['uri'] === $uri) {
-                list($controllerName, $methodName) = explode('@', $route['controller']);
-                $controllerName = "Controllers\\" . $controllerName;
-                
-                if (class_exists($controllerName)) {
-                    $controller = new $controllerName();
-                    if (method_exists($controller, $methodName)) {
-                        $controller->$methodName();
+
+                // ── Verificação por PERMISSION (não por role) ──
+                if ($route['permission'] !== null) {
+                    Auth::requirePermission($route['permission']);
+                }
+                // ───────────────────────────────────────────────
+
+                [$controllerName, $methodName] = explode('@', $route['controller']);
+                $controllerClass = "Controllers\\{$controllerName}";
+
+                if (class_exists($controllerClass)) {
+                    $obj = new $controllerClass();
+                    if (method_exists($obj, $methodName)) {
+                        $obj->$methodName();
                         return;
                     }
                 }
